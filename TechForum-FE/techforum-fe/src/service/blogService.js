@@ -11,3 +11,12 @@ export const getAllBlog = async () => {
     console.error(error);
   }
 };
+export const addNewBlog = async (blog) => {
+  try {
+    await axios.post("http://localhost:3001/api/blog/addNewBlog/ ", blog);
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+

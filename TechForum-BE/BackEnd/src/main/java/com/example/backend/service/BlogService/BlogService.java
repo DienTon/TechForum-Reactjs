@@ -18,6 +18,11 @@ public class BlogService implements IBlogService {
     private IBlogRepository iBlogRepository;
 
     @Override
+    public void updateBlogById(long id, Blog blog) {
+        iBlogRepository.updateBlogById(id, blog);
+    }
+
+    @Override
     public List<Blog> findByUser(User user) {
         return iBlogRepository.findByUser(user);
     }

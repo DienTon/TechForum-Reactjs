@@ -27,7 +27,8 @@ function BlogList(props) {
 
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>List book</h1>
+        <button className="btn btn-primary">Thêm sách</button>
+        <h1 style={{ textAlign: "center" }}>List book</h1>
       <table className="table table-hover">
         <thead>
           <tr>
