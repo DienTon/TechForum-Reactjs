@@ -2,6 +2,7 @@ package com.example.backend.repository;
 
 
 import com.example.backend.model.Blog.Blog;
+import com.example.backend.model.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,7 +16,8 @@ import java.util.List;
 public interface IBlogRepository extends JpaRepository<Blog,Long> {
     Page<Blog> findAll(Pageable pageable);
     List<Blog> findByStatusFalse();
-    @Query("SELECT b FROM Blog b WHERE b.name LIKE %:name%")
-    List<Blog> findByName(@Param("name") String name);
+    List<Blog> findByUser(User user);
+    @Query("SELECT b FROM Blog b WHERE b.title LIKE %:title%")
+    List<Blog> findByTitle(@Param("title") String title);
 
 }

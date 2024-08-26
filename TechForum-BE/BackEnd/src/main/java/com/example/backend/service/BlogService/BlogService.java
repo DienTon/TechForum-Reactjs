@@ -2,6 +2,7 @@ package com.example.backend.service.BlogService;
 
 
 import com.example.backend.model.Blog.Blog;
+import com.example.backend.model.user.User;
 import com.example.backend.repository.IBlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,6 +16,11 @@ public class BlogService implements IBlogService {
 
     @Autowired
     private IBlogRepository iBlogRepository;
+
+    @Override
+    public List<Blog> findByUser(User user) {
+        return iBlogRepository.findByUser(user);
+    }
 
     @Override
     public Page<Blog> findAll(Pageable pageable) {
@@ -47,9 +53,11 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public List<Blog> findByName(String name) {
-        return iBlogRepository.findByName(name);
+    public List<Blog> findByTitle(String title) {
+        return iBlogRepository.findByTitle(title);
+
     }
+
 
     @Override
     public List<Blog> findByStatusFalse () {

@@ -1,5 +1,6 @@
 package com.example.backend.model.Blog;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -10,8 +11,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
-    private List<Blog> blogList;
+
 
     public Category() {
     }
@@ -36,11 +36,4 @@ public class Category {
         this.name = name;
     }
 
-    public List<Blog> getBlogList() {
-        return blogList;
-    }
-
-    public void setBlogList(List<Blog> blogList) {
-        this.blogList = blogList;
-    }
 }

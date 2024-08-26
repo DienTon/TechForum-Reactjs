@@ -4,6 +4,7 @@ package com.example.backend.model.user;
 import com.example.backend.model.Blog.Blog;
 import com.example.backend.model.Blog.CommentBlog;
 import com.example.backend.model.Blog.LikeBlog;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -30,8 +31,8 @@ public class User {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
     private List<Role> roles = new ArrayList<>();
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
-    private List<Blog> blogs;
+
+
     private Boolean status;
     private String userName;
     private String phoneNumber;
@@ -59,64 +60,6 @@ public class User {
 
     public void setLikes(List<LikeBlog> likes) {
         this.likes = likes;
-    }
-
-    public User(Long id, String email, String password, List<Role> roles, List<Blog> blogs, Boolean status) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.blogs = blogs;
-        this.status = status;
-    }
-
-    public User(Long id, String email, String password, List<Role> roles, Boolean status) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-        this.status = status;
-    }
-
-    public User(String email, String password, List<Role> roles) {
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
-    }
-    public User() {
-        this.status = true;
-    }
-
-    public List<Blog> getBlogs() {
-        return blogs;
-    }
-
-    public void setBlogs(List<Blog> blogs) {
-        this.blogs = blogs;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getBirthDay() {
-        return birthDay;
-    }
-
-    public void setBirthDay(String birthDay) {
-        this.birthDay = birthDay;
     }
 
     public Long getId() {
@@ -149,5 +92,45 @@ public class User {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthDay() {
+        return birthDay;
+    }
+
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
+    }
+
+    public User() {
+    }
+
+    public User(Long id, String email, String password, List<CommentBlog> comments, List<LikeBlog> likes, List<Role> roles, Boolean status, String userName, String phoneNumber, String birthDay) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.comments = comments;
+        this.likes = likes;
+        this.roles = roles;
+        this.status = status;
+        this.userName = userName;
+        this.phoneNumber = phoneNumber;
+        this.birthDay = birthDay;
     }
 }

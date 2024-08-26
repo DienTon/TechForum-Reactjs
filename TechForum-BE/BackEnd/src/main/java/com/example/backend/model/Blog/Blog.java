@@ -2,6 +2,8 @@ package com.example.backend.model.Blog;
 
 
 import com.example.backend.model.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,13 +15,12 @@ public class Blog {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String title;
 
     @Lob
     @Column(columnDefinition = "TEXT")
-    private String type;
+    private String content;
     private int viewBlog;
-    private String author;
     private Boolean status;
 
     public Boolean getStatus() {
@@ -80,29 +81,23 @@ public class Blog {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public String getContent() {
+        return content;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getAuthor() {
-        return author;
-    }
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
 
     public User getUser() {
         return user;

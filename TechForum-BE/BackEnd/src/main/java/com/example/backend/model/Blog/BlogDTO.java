@@ -8,11 +8,20 @@ import org.springframework.validation.Validator;
 public class BlogDTO implements Validator {
     @NotBlank(message = "Not empty")
     @Size(min = 3, message = ">3 characters")
-    private String name;
+    private String title;
 
     @Size(min = 3, message = ">3 characters")
-    private String type;
+    private String content;
     private Long category;
+    private Long user;
+
+    public Long getUser() {
+        return user;
+    }
+
+    public void setUser(Long user) {
+        this.user = user;
+    }
 
     private int viewBlog;
 
@@ -28,20 +37,20 @@ public class BlogDTO implements Validator {
         this.viewBlog = viewBlog;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getType() {
-        return type;
+    public String getContent() {
+        return content;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setContent(String content) {
+        this.content = content;
     }
 
     public Long getCategory() {
