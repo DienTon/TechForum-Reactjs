@@ -51,27 +51,27 @@ public class BlogController {
         }
     }
 
-    @DeleteMapping("/deleteBlog/{id}")
-    public ResponseEntity<String> deleteBlog(@PathVariable Long id) {
-        try {
-            blogService.delete(id);
-            return new ResponseEntity<>("Blog deleted successfully", HttpStatus.OK);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to delete blog", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-    @PutMapping("/updateBlog/{id}")
-    public ResponseEntity<String> updateBlog(@PathVariable Long id, @RequestBody @Valid Blog updatedBlog) {
-        try {
-            blogService.updateBlogById(id, updatedBlog);
-            return new ResponseEntity<>("Blog updated successfully", HttpStatus.OK);
-        } catch (EntityNotFoundException e) {
-            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            return new ResponseEntity<>("Failed to update blog", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @DeleteMapping("/deleteBlog/{id}")
+//    public ResponseEntity<String> deleteBlog(@PathVariable Long id) {
+//        try {
+//            blogService.delete(id);
+//            return new ResponseEntity<>("Blog deleted successfully", HttpStatus.OK);
+//        } catch (EntityNotFoundException e) {
+//            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>("Failed to delete blog", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+//    @PutMapping("/updateBlog/{id}")
+//    public ResponseEntity<String> updateBlog(@PathVariable Long id, @RequestBody @Valid Blog updatedBlog) {
+//        try {
+//            blogService.updateBlogById(id, updatedBlog);
+//            return new ResponseEntity<>("Blog updated successfully", HttpStatus.OK);
+//        } catch (EntityNotFoundException e) {
+//            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>("Failed to update blog", HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 }

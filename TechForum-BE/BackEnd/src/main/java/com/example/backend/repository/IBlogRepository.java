@@ -20,6 +20,5 @@ public interface IBlogRepository extends JpaRepository<Blog,Long> {
     @Query("SELECT b FROM Blog b WHERE b.title LIKE %:title%")
     List<Blog> findByTitle(@Param("title") String title);
 
-    void updateBlogById(long id, Blog blog);
 
 }

@@ -4,6 +4,7 @@ package com.example.backend.service.BlogService;
 import com.example.backend.model.Blog.Blog;
 import com.example.backend.model.user.User;
 import com.example.backend.repository.IBlogRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +18,15 @@ public class BlogService implements IBlogService {
     @Autowired
     private IBlogRepository iBlogRepository;
 
+
     @Override
-    public void updateBlogById(long id, Blog blog) {
-        iBlogRepository.updateBlogById(id, blog);
+    public Blog updateBlog(Long id, Blog updatedBlog) {
+        if (iBlogRepository.existsById(id)) {
+            updatedBlog.setId(id); // Đảm bảo rằng đối tượng có id đúng
+            return iBlogRepository.save(updatedBlog);
+        } else {
+            throw new EntityNotFoundException("Blog with id " + id + " not found");
+        }
     }
 
     @Override

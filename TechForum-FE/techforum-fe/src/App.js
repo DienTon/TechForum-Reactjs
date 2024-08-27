@@ -4,6 +4,7 @@ import BlogList from '../src/component/blogComponent/blogList';
 import 'bootstrap/dist/css/bootstrap.css';
 import {ToastContainer} from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 
 function App() {
   return (
