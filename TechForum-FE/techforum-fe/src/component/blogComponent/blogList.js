@@ -59,7 +59,7 @@ function BlogList(props) {
   const handleShow = () => setShow(true);
   return (
     <>
-      <div>
+      <div className="blogList-style">
         <body style={{ backgroundColor: "rgb(250, 250, 250)" }}>
           <div className="navigation">
             <div className="wrap-content-nav">
@@ -218,8 +218,9 @@ function BlogList(props) {
 
           {/* <!-- Modal --> */}
           
+          <div className="modal-dialog">
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal show={show} onHide={handleClose} >
             <Modal.Header closeButton>
               <Modal.Title>Modal heading</Modal.Title>
             </Modal.Header>
@@ -231,7 +232,7 @@ function BlogList(props) {
               >
                 {({ errors, touched }) => (
                   <Form>
-                    <div className="mb-3">
+                    <div >
                       <label htmlFor="inputCate" className="form-label">
                         Chủ đề:
                       </label>
@@ -250,7 +251,7 @@ function BlogList(props) {
                       ) : null}
                     </div>
 
-                    <div className="mb-3">
+                    <div>
                       <label htmlFor="inputName" className="form-label">
                         Tiêu đề:
                       </label>
@@ -265,7 +266,7 @@ function BlogList(props) {
                       ) : null}
                     </div>
 
-                    <div className="mb-3">
+                    <div >
                       <label htmlFor="inputContent" className="form-label">
                         Nội dung:
                       </label>
@@ -291,6 +292,7 @@ function BlogList(props) {
               </Formik>
             </Modal.Body>
           </Modal>
+          </div>
 
           {/* <script>
     function toggleDropdown(id) {
