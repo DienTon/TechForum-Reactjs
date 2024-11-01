@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.model.Blog.Blog;
+import com.example.backend.model.dto.BlogDTO;
 import com.example.backend.service.BlogService.IBlogService;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -19,28 +20,23 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/blog")
-@CrossOrigin(value = "http://localhost:3000",allowedHeaders = "*")
+@CrossOrigin(value = "http://localhost:3000", allowedHeaders = "*")
 public class BlogController {
     @Autowired
     private IBlogService blogService;
 
     @GetMapping("/")
-    public ResponseEntity<Page<Blog>> showAllBlog(
-            @RequestParam(defaultValue = "0") int page
-    ) {
-        Sort sort = Sort.by("viewBlog").ascending();
-        Pageable pageable = PageRequest.of(page, 99, sort);
-        Page<Blog> blogs = blogService.findAll(pageable);
-        return new ResponseEntity<>(blogs, HttpStatus.OK);
+    public Page<BlogDTO> showAllBlog(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id,asc") String[] sort) {
+
+        Sort.Direction direction = Sort.Direction.fromString(sort[1]);
+        Pageable pageable = PageRequest.of(page, size, Sort.by(direction, sort[0]));
+        return blogService.findAll(pageable);
     }
 
-    //    public ResponseEntity<ApiResponseDTO<Void>> createNewLanding(@RequestBody @Valid LandingRequestDTO landingRequestDTO) {
-//        iLandingService.createLanding(landingRequestDTO);
-//
-//        ApiResponseDTO apiResponseDTO = ApiResponseDTO.builder().code(1000).message("Thêm mặt bằng thành công").build();
-//
-//        return new ResponseEntity<>(apiResponseDTO,HttpStatus.OK);
-//    }
+
     @PostMapping("/addNewBlog")
     public ResponseEntity<String> addNewBlog(@RequestBody @Valid Blog blog) {
         try {

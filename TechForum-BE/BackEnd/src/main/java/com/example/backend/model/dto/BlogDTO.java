@@ -1,5 +1,8 @@
 package com.example.backend.model.dto;
 
+import com.example.backend.model.Blog.Blog;
+import com.example.backend.model.Blog.Category;
+import com.example.backend.model.user.User;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import org.springframework.validation.Errors;
@@ -12,20 +15,25 @@ public class BlogDTO implements Validator {
 
     @Size(min = 3, message = ">3 characters")
     private String content;
-    private Long category;
-    private Long user;
+    private Category category;
+    private User user;
 
-    public Long getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Long user) {
+    public void setUser(User user) {
         this.user = user;
     }
 
     private int viewBlog;
 
-    public BlogDTO() {
+    public BlogDTO(Blog blog) {
+        this.title = blog.getTitle();
+        this.content = blog.getContent();
+        this.category = blog.getCategory();
+        this.user = blog.getUser();
+        this.viewBlog = blog.getViewBlog();
     }
 
 
@@ -53,11 +61,11 @@ public class BlogDTO implements Validator {
         this.content = content;
     }
 
-    public Long getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(Long category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

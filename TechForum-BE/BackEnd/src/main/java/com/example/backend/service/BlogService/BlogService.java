@@ -2,6 +2,7 @@ package com.example.backend.service.BlogService;
 
 
 import com.example.backend.model.Blog.Blog;
+import com.example.backend.model.dto.BlogDTO;
 import com.example.backend.model.user.User;
 import com.example.backend.repository.IBlogRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -35,8 +36,9 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public Page<Blog> findAll(Pageable pageable) {
-        return iBlogRepository.findAll(pageable);
+    public Page<BlogDTO> findAll(Pageable pageable) {
+        Page<Blog>blogs =iBlogRepository.findAll(pageable);
+        return  blogs.map(blog -> new BlogDTO(blog));
     }
 
     @Override
