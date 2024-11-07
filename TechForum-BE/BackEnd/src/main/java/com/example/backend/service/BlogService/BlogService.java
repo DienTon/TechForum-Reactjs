@@ -6,6 +6,7 @@ import com.example.backend.model.dto.BlogDTO;
 import com.example.backend.model.user.User;
 import com.example.backend.repository.IBlogRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,10 +22,9 @@ public class BlogService implements IBlogService {
 
 
     @Override
-    public Blog updateBlog(Long id, Blog updatedBlog) {
+    public Blog updateBlog(Long id,@Valid BlogDTO updatedBlog) {
         if (iBlogRepository.existsById(id)) {
-            updatedBlog.setId(id); // Đảm bảo rằng đối tượng có id đúng
-            return iBlogRepository.save(updatedBlog);
+            return iBlogRepository.save(dtoToObject(updatedBlog));
         } else {
             throw new EntityNotFoundException("Blog with id " + id + " not found");
         }
@@ -42,8 +42,8 @@ public class BlogService implements IBlogService {
     }
 
     @Override
-    public void addNewBlog(Blog blog) {
-        iBlogRepository.save(blog);
+    public Blog addNewBlog(BlogDTO blog) {
+       return iBlogRepository.save(dtoToObject(blog));
     }
 
     @Override
@@ -58,20 +58,20 @@ public class BlogService implements IBlogService {
 
     @Override
     public void delete(long id) {
-        iBlogRepository.deleteById(id);
-    }
-
-    @Override
-    public void save(Blog blog) {
+        Blog blog = iBlogRepository.findById(id).get();
+        blog.setStatus(true);
         iBlogRepository.save(blog);
     }
+
 
     @Override
     public List<Blog> findByTitle(String title) {
         return iBlogRepository.findByTitle(title);
 
     }
-
+    public Blog dtoToObject(BlogDTO blogDTO){
+        return new Blog(blogDTO);
+    }
 
     @Override
     public List<Blog> findByStatusFalse () {

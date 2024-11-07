@@ -9,14 +9,13 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 public interface IBlogService {
-    Blog updateBlog(Long id, Blog updatedBlog);
+    Blog updateBlog(Long id, BlogDTO updatedBlog);
     List<Blog> findByUser(User user);
     Page<BlogDTO>findAll(Pageable pageable);
-    void addNewBlog(Blog blog);
+    Blog addNewBlog(BlogDTO blog);
     List<Blog> findAlll();
     Blog findOne(long id);
     void delete(long id);
-    void save(Blog blog);
     List<Blog> findByTitle(String title);
     List<Blog> findByStatusFalse();
 }

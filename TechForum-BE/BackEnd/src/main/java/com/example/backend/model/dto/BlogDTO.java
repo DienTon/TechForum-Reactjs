@@ -27,6 +27,7 @@ public class BlogDTO implements Validator {
     }
 
     private int viewBlog;
+    private Boolean status;
 
     public BlogDTO(Blog blog) {
         this.title = blog.getTitle();
@@ -34,8 +35,19 @@ public class BlogDTO implements Validator {
         this.category = blog.getCategory();
         this.user = blog.getUser();
         this.viewBlog = blog.getViewBlog();
+        this.status = blog.getStatus();
     }
 
+    public BlogDTO() {
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public int getViewBlog() {
         return viewBlog;

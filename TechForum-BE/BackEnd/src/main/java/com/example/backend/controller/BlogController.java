@@ -38,36 +38,28 @@ public class BlogController {
 
 
     @PostMapping("/addNewBlog")
-    public ResponseEntity<String> addNewBlog(@RequestBody @Valid Blog blog) {
+    public ResponseEntity<Blog> addNewBlog(@RequestBody @Valid BlogDTO blog) {
+        Blog savedBlog = blogService.addNewBlog(blog);
+        return new ResponseEntity<>(savedBlog, HttpStatus.CREATED);
+    }
+
+    @DeleteMapping("/deleteBlog")
+    public ResponseEntity<String> deleteBlog(@RequestParam Long id){
+        blogService.delete(id);
+        return new ResponseEntity<>("Xoa thanh cong",HttpStatus.OK);
+    }
+
+    @PutMapping("/updateBlog")
+    public ResponseEntity<String> updateBlog(@RequestParam Long id, @RequestBody  BlogDTO blogDTO) {
         try {
-            blogService.addNewBlog(blog);
-            return new ResponseEntity<>("Blog created successfully", HttpStatus.CREATED);
+            blogService.updateBlog(id, blogDTO);
+            return new ResponseEntity<>("Product updated successfully", HttpStatus.OK);
+        } catch (EntityNotFoundException e) {
+            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         } catch (Exception e) {
-            return new ResponseEntity<>("Failed to create blog", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>("Failed to update Product", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-//    @DeleteMapping("/deleteBlog/{id}")
-//    public ResponseEntity<String> deleteBlog(@PathVariable Long id) {
-//        try {
-//            blogService.delete(id);
-//            return new ResponseEntity<>("Blog deleted successfully", HttpStatus.OK);
-//        } catch (EntityNotFoundException e) {
-//            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>("Failed to delete blog", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-//    @PutMapping("/updateBlog/{id}")
-//    public ResponseEntity<String> updateBlog(@PathVariable Long id, @RequestBody @Valid Blog updatedBlog) {
-//        try {
-//            blogService.updateBlogById(id, updatedBlog);
-//            return new ResponseEntity<>("Blog updated successfully", HttpStatus.OK);
-//        } catch (EntityNotFoundException e) {
-//            return new ResponseEntity<>("Blog not found", HttpStatus.NOT_FOUND);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>("Failed to update blog", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
 
 }

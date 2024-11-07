@@ -1,9 +1,12 @@
 package com.example.backend.model.Blog;
 
 
+import com.example.backend.model.dto.BlogDTO;
 import com.example.backend.model.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -59,11 +62,21 @@ public class Blog {
         return formattedDateTime;
     }
 
+    public Blog(BlogDTO blog) {
+        this.title = blog.getTitle();
+        this.content = blog.getContent();
+        this.category = blog.getCategory();
+        this.user = blog.getUser();
+        this.viewBlog = blog.getViewBlog();
+        this.creationDate = formatDate();
+        this.status = false;
+    }
     public Blog() {
-         this.creationDate = formatDate();
+        this.creationDate = formatDate();
         this.status = false;
 
     }
+
 
     public List<LikeBlog> getLikes() {
         return likes;
