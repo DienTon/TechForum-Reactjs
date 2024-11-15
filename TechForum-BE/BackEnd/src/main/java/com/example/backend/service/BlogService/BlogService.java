@@ -24,7 +24,14 @@ public class BlogService implements IBlogService {
     @Override
     public Blog updateBlog(Long id,@Valid BlogDTO updatedBlog) {
         if (iBlogRepository.existsById(id)) {
-            return iBlogRepository.save(dtoToObject(updatedBlog));
+            Blog blog = iBlogRepository.findById(id).get();
+            blog.setViewBlog(updatedBlog.getViewBlog());
+            blog.setCategory(updatedBlog.getCategory());
+            blog.setUser(updatedBlog.getUser());
+            blog.setContent(updatedBlog.getContent());
+            blog.setTitle(updatedBlog.getTitle());
+            blog.setStatus(updatedBlog.getStatus());
+            return iBlogRepository.save(blog);
         } else {
             throw new EntityNotFoundException("Blog with id " + id + " not found");
         }
